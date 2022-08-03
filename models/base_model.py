@@ -25,3 +25,11 @@ class BaseModel:
     def save(self):
         """ Updates the updated_at attribute """
         self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """ Returns a dict which contains all keys/values of __dict__ """
+        temp_dict = self.__dict__
+        temp_dict['__class__'] = type(self).__name__
+        temp_dict['created_at'] = temp_dict['created_at'].isoformat()
+        temp_dict['updated_at'] = temp_dict['updated_at'].isoformat()
+        return temp_dict
