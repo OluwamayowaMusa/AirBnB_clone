@@ -4,6 +4,7 @@
 """
 import json
 import os
+import models
 
 
 class FileStorage:
@@ -22,7 +23,7 @@ class FileStorage:
 
     def all(self):
         """ Returns the dict __objects """
-        return self. __objects
+        return self.__objects
 
     def new(self, obj):
         """ Adds obj to __objects dict.
@@ -35,13 +36,14 @@ class FileStorage:
 
     def save(self):
         """ Serializes __objects to JSON file """
-        json_string = json.dumps(self.__objects)
+        temp_dict = {}
+        for key in self.__objects:
+            temp_dict[key] = self.__objects[key].to_dict()
         with open(self.__file_path, 'w', encoding='utf-8') as temp_file:
-            temp_file.write(json_string)
+            json.dump(temp_dict, temp_file)
 
     def reload(self):
         """ Deserializes the JSON file to __objects """
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as temp_file:
-                json_object = temp_file.read()
-            self.__objects = json.loads(json_object)
+                temp_dict = json.load(temp_file)
