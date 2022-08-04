@@ -4,7 +4,7 @@
 """
 
 import cmd
-import sys
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,10 +17,10 @@ class HBNBCommand(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.prompt = '(hbnb) '
 
-    def do_quit(self, arg):
+    def do_quit(self, line):
         """Quit command to exit the program
         """
-        sys.exit(1)
+        return True
 
     def do_EOF(self, line):
         """ """
@@ -29,6 +29,20 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Empty line plus enter shouldnt execute anything. """
         pass
+
+    def do_create(self, line):
+        """ Creates a new instance of BaseModel. """
+        if not line:
+            print("**class name missing **")
+        else:
+            line = line.split()
+            if line[0] != "BaseModel":
+                print("** class doesn't exist **")
+            else:
+                new_instance = BaseModel()
+                print(new_instance.id)
+                new_instance.save()
+
 
 
 if __name__ == '__main__':
