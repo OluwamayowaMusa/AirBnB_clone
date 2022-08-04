@@ -17,6 +17,9 @@ class HBNBCommand(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.prompt = '(hbnb)'
 
+    def do_quit(self, arg):
+        """ Exits the Program. """
+        sys.exit(1)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
