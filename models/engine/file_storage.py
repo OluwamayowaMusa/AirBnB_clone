@@ -4,7 +4,6 @@
 """
 import json
 import os
-import models
 
 
 class FileStorage:
@@ -31,7 +30,7 @@ class FileStorage:
         Args:
             obj (...): Object passed
         """
-        key = type(obj).__name__ +'.' + obj.id
+        key = type(obj).__name__ + '.' + obj.id
         self.__objects[key] = obj
 
     def save(self):
@@ -47,3 +46,7 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as temp_file:
                 temp_dict = json.load(temp_file)
+
+            from models.base_model import BaseModel
+            for key in temp_dict:
+                self.__objects[key] = BaseModel(**temp_dict[key])
