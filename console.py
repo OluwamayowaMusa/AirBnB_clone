@@ -15,11 +15,17 @@ class HBNBCommand(cmd.Cmd):
     def __init__(self):
         """ Initializes the object. """
         cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb)'
+        self.prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """ Exits the Program. """
+        """Quit command to exit the program
+        """
         sys.exit(1)
+
+    def do_EOF(self, line):
+        """ """
+        return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
