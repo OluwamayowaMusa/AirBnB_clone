@@ -16,7 +16,6 @@ class TestBaseModel(unittest.TestCase):
     def setUpClass(cls):
         """ Setup test examples as class attributes """
         cls.model1 = BaseModel()
-        cls.model1.name = "Azezz"
 
     def test_id(self):
         """ Test attributes of BaseModel class """
