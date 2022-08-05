@@ -1,33 +1,39 @@
 #!/usr/bin/python3
-""" A Command Interpreter Class.
+""" A Command Line Interpreter using the built-in cmd module.
+
+The class HBNBCommand inherits from the cmd.Cmd class which allows us to
+make us of the methods and attributes associted with the cmd.Cmd class
 
 """
-
 import cmd
 from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Defines instance attribute for Command Interpreter Class.
+    """ Defines attributes(method and fields) for Command Interpreter Class.
 
+    Attributes:
+        intro (str): An introduction to the CLI
+        prompt (str): A prompt which takes in commands
     """
+    intro = "\tWelcome to HBNB CLI\n"\
+            "\tfor help, enter '?'\n"\
+            "\tto quit, enter 'quit'"
 
-    def __init__(self):
-        """ Initializes the object. """
-        cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb) '
+    prompt = "(hbnb) "
 
     def do_quit(self, line):
-        """Quit command to exit the program
+        """ Quit command to exit the program
         """
         return True
 
     def do_EOF(self, line):
-        """ """
+        """ Indicates end of file. Quits the program
+        """
         return True
 
     def emptyline(self):
-        """ Empty line plus enter shouldnt execute anything. """
+        """ Do nothing """
         pass
 
     def do_create(self, line):
@@ -42,7 +48,6 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = BaseModel()
                 print(new_instance.id)
                 new_instance.save()
-
 
 
 if __name__ == '__main__':
