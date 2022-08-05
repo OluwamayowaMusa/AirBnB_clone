@@ -77,12 +77,12 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
-                all_dict = storage.all()
+                all_instances = storage.all()
                 dict_key = args[0] + '.' + args[1]
-                if dict_key not in all_dict:
+                if dict_key not in all_instances:
                     print("** no instance found **")
                 else:
-                    print(all_dict[dict_key])
+                    print(all_instances[dict_key])
 
     def do_destroy(self, args):
         """ Destroys an istance based on className and id """
@@ -95,15 +95,29 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
-                all_dict = storage.all()
+                all_instances = storage.all()
                 dict_key = args[0] + '.' + args[1]
-                if dict_key not in all_dict:
+                if dict_key not in all_instances:
                     print("** no instance found **")
                 else:
-                    del all_dict[dict_key]
+                    del all_instances[dict_key]
                     storage.save()
  
-
-
+    def do_all(self, args):
+        all_instances =  storage.all()
+        str_list = []
+        if len(args) == 0:
+            for instance in all_instances:
+                str_list.append(str(all_instances[instance]))
+            print(str_list)
+        else:
+            class_instance = args.split()[0]
+            if class_instance != "BaseModel":
+                print("** class doesn't exist **")
+            else:
+                for instance in all_instances.keys():
+                    if class_instance in instance:
+                       str_list.append(str(instance))
+                print(str_list)
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
