@@ -5,6 +5,7 @@
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
@@ -28,7 +29,10 @@ class TestFileStorage(unittest.TestCase):
         temp_dict = self.storage.all()
         self.assertEqual(type(temp_dict), dict)
         for key in temp_dict:
-            self.assertEqual(type(temp_dict[key]), BaseModel)
+            if key.split('.')[0] == "BaseModel":
+                self.assertEqual(type(temp_dict[key]), BaseModel)
+            elif key.split('.')[0] == "User":
+                self.assertEqual(type(temp_dict[key]), User)
 
     @classmethod
     def tearDownClass(cls):
