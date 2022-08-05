@@ -48,5 +48,9 @@ class FileStorage:
                 temp_dict = json.load(temp_file)
 
             from models.base_model import BaseModel
+            from models.user import User
             for key in temp_dict:
-                self.__objects[key] = BaseModel(**temp_dict[key])
+                if temp_dict[key]["__class__"] == "BaseModel":
+                    self.__objects[key] = BaseModel(**temp_dict[key])
+                if temp_dict[key]["__class__"] == "User":
+                    self.__objects[key] = User(**temp_dict[key])
