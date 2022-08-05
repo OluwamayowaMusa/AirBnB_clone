@@ -22,27 +22,43 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    def do_quit(self, line):
+    def do_quit(self, args):
         """ Quit command to exit the program
-        """
-        return True
 
-    def do_EOF(self, line):
-        """ Indicates end of file. Quits the program
+        Args:
+            args (str): Arguments passed
         """
-        return True
+        if not args:
+            return True
+        else:
+            print(f"*** Unknowm syntax: quit {args}")
+
+    def do_EOF(self, args):
+        """ Indicates end of file. Quits the program
+
+        Args:
+            args (str): Arguments passed
+        """
+        if not args:
+            return True
+        else:
+            print(f"*** Unknown syntax: EOF {args}")
 
     def emptyline(self):
         """ Do nothing """
         pass
 
-    def do_create(self, line):
-        """ Creates a new instance of BaseModel. """
-        if not line:
+    def do_create(self, args):
+        """ Creates a new instance of BaseModel.
+
+        Args:
+            args (...): Name of Model passed
+        """
+        if not args:
             print("**class name missing **")
         else:
-            line = line.split()
-            if line[0] != "BaseModel":
+            args = args.split()
+            if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             else:
                 new_instance = BaseModel()
