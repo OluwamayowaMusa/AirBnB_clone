@@ -7,7 +7,7 @@ make us of the methods and attributes associted with the cmd.Cmd class
 """
 import cmd
 from models.base_model import BaseModel
-
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """ Defines attributes(method and fields) for Command Interpreter Class.
@@ -64,22 +64,26 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = BaseModel()
                 print(new_instance.id)
                 new_instance.save()
-   def do_show(self, args):
-        """ Print string representation of an instance. """
+    def do_show(self, args):
+        """ Print string representation of an instance based on classname and id
+
+        """
         if not args:
             print("** class name missing **")
         else:
             args = args.split()
             args_len = len(args)
             if args[0] != "BaseModel":
-                print("** class doesn't exist**")
+                print("** class doesn't exist **")
             elif args_len < 2:
                 print("** instance id missing **")
-            elif (new_instance.id != id):
-                print("** no instance found **")
+            all_dict = storage.all()
+            all_ids = []
+            for item in all_dict.keys():
+               all_ids.append(item.split('.')[1])
+            if args[1] not in all_ids:
+                print("** instance id missing **")
             else:
-                pass
-
-
+                print(all_dict[args[0] + '.' + args[1]])
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
