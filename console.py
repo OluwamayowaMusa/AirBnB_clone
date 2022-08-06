@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             else:
-                new_instance = BaseModel()
+                new_instance = eval(args[0])(args[1:])
                 print(new_instance.id)
                 new_instance.save()
 
