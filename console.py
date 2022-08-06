@@ -60,10 +60,10 @@ class HBNBCommand(cmd.Cmd):
             print("**class name missing **")
         else:
             args = args.split()
-            if args[0] not in class_list:
+            if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             else:
-                new_instance = eval(args[0])()
+                new_instance = eval(args[0])(args[1:])
                 print(new_instance.id)
                 new_instance.save()
 
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = args.split()
-            if args[0] not in class_list:
+            if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing  **")
         else:
             args = args.split()
-            if args[0] not in class_list:
+            if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
             print(str_list)
         else:
             class_instance = args.split()[0]
-            if class_instance not in class_list:
+            if class_instance != "BaseModel":
                 print("** class doesn't exist **")
             else:
                 for instance in all_instances.keys():
@@ -150,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = args.split()
-            if args[0] not in class_list
+            if args[0] != "BaseModel":
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
