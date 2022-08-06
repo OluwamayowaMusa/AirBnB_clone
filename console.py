@@ -164,7 +164,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** value missing **")
                 else:
                     attr = args[2]
-                    value = args[3]
+                    value = args[3].strip('"')
                     if hasattr(class_instance, attr):
                         attr_type = type(class_instance, attr)
                         if attr_type == int:
@@ -176,8 +176,10 @@ class HBNBCommand(cmd.Cmd):
                                     attr, float(value))
                             storage.save()
                         else:
-                            setattr(all_instances[class_instance], attr, value)
-                            storage.save()
+                            pass
+                    else:
+                        setattr(all_instances[class_instance], attr, value)
+                        storage.save()
 
 
 if __name__ == '__main__':
