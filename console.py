@@ -9,6 +9,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """ Defines attributes(method and fields) for Command Interpreter Class.
 
@@ -64,9 +65,13 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = BaseModel()
                 print(new_instance.id)
                 new_instance.save()
-    def do_show(self, args):
-        """ Print string representation of an instance based on classname and id
 
+    def do_show(self, args):
+        """
+        Print string representation of an instance based on classname and id
+
+        Args:
+            args (...): Name and id of Model passed
         """
         if not args:
             print("** class name missing **")
@@ -85,7 +90,11 @@ class HBNBCommand(cmd.Cmd):
                     print(all_instances[class_instance])
 
     def do_destroy(self, args):
-        """ Destroys an instance based on className and id """
+        """ Destroy an instance based on className and id
+
+        Args:
+            args (...): Name and id of Model Passed
+        """
         if not args:
             print("** class name missing  **")
         else:
@@ -102,9 +111,16 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     del all_instances[class_instance]
                     storage.save()
- 
+
     def do_all(self, args):
-        all_instances =  storage.all()
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+
+        Args:
+            args (...): Name of Model passed
+        """
+        all_instances = storage.all()
         str_list = []
         if len(args) == 0:
             for instance in all_instances:
@@ -117,10 +133,18 @@ class HBNBCommand(cmd.Cmd):
             else:
                 for instance in all_instances.keys():
                     if class_instance in instance:
-                       str_list.append(str(instance))
+                        str_list.append(str(instance))
                 print(str_list)
 
     def do_update(self, args):
+        """
+        Update an instance based on class name and id
+        by adding or updating attribute
+
+        Args:
+            args (...): Name, id and atributes of a model
+        """
+
         if not args:
             print("** class name missing **")
         else:
@@ -132,11 +156,28 @@ class HBNBCommand(cmd.Cmd):
             else:
                 all_instances = storage.all()
                 class_instance = args[0] + '.' + args[1]
-                if class_instance not in all_instance:
+                if class_instance not in all_instances:
                     print("** no instance found **")
+                elif len(args) < 3:
+                    print("** attribute missing **")
+                elif len(args) < 4:
+                    print("** value missing **")
                 else:
-                    pass
-
+                    attr = args[2]
+                    value = args[3]
+                    if hasattr(class_instance, attr):
+                        attr_type = type(class_instance, attr)
+                        if attr_type == int:
+                            setattr(all_instances[class_instance],
+                                         attr, int(value))
+                            storage.save()
+                        elif attr_type == float:
+                            setattr(all_instances[class_instance],
+                                         attr, float(value))
+                            storage.save()
+                        else:
+                            setattr(all_instances[class_instance], attr, value)
+                            storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
