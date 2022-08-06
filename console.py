@@ -128,12 +128,12 @@ class HBNBCommand(cmd.Cmd):
             print(str_list)
         else:
             class_instance = args.split()[0]
-            if class_instance != "BaseModel":
+            if args != "BaseModel":
                 print("** class doesn't exist **")
             else:
-                for instance in all_instances.keys():
-                    if class_instance in instance:
-                        str_list.append(str(instance))
+                for instance in all_instances:
+                    if args == instance.split('.')[0]:
+                        str_list.append(str(all_instances[instance]))
                 print(str_list)
 
     def do_update(self, args):
@@ -165,18 +165,19 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     attr = args[2]
                     value = args[3].strip('"')
-                    if hasattr(class_instance, attr):
-                        attr_type = type(class_instance, attr)
+                    if hasattr(all_instances[class_instance], attr):
+                        attr_type = type(getattr(all_instances[class_instance],
+                                         attr))
                         if attr_type == int:
                             setattr(all_instances[class_instance],
                                     attr, int(value))
-                            storage.save()
                         elif attr_type == float:
                             setattr(all_instances[class_instance],
                                     attr, float(value))
-                            storage.save()
-                        else:
-                            pass
+                        elif attr_type == str:
+                            setattr(all_instances[class_instance],
+                                    attr, value)
+                        storage.save()
                     else:
                         setattr(all_instances[class_instance], attr, value)
                         storage.save()
