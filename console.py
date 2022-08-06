@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
             args (...): Name and id of Model Passed
         """
         if not args:
-            print("** class name missing  **")
+            print("** class name missing **")
         else:
             args = args.split()
             if args[0] != "BaseModel":
