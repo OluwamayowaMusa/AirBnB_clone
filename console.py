@@ -40,7 +40,6 @@ class HBNBCommand(cmd.Cmd):
         """
         if not args:
             return True
-        B
         else:
             print(f"*** Unknown syntax: EOF {args}")
 
