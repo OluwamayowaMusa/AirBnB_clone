@@ -17,10 +17,6 @@ class HBNBCommand(cmd.Cmd):
         intro (str): An introduction to the CLI
         prompt (str): A prompt which takes in commands
     """
-    intro = "\tWelcome to HBNB CLI\n"\
-            "\tfor help, enter '?'\n"\
-            "\tto quit, enter 'quit'"
-
     prompt = "(hbnb) "
 
     def do_quit(self, args):
