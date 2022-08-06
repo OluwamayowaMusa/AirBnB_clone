@@ -18,6 +18,8 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): A prompt which takes in commands
     """
     prompt = "(hbnb) "
+    
+    class_list = ["BaseModel", "User"]
 
     def do_quit(self, args):
         """ Quit command to exit the program
@@ -38,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not args:
             return True
+        B
         else:
             print(f"*** Unknown syntax: EOF {args}")
 
@@ -55,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             print("**class name missing **")
         else:
             args = args.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.class_list:
                 print("** class doesn't exist **")
             else:
                 new_instance = eval(args[0])(args[1:])
@@ -73,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = args.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.class_list:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -95,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = args.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.class_list:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -124,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
             print(str_list)
         else:
             class_instance = args.split()[0]
-            if args != "BaseModel":
+            if args not in self.class_list:
                 print("** class doesn't exist **")
             else:
                 for instance in all_instances:
@@ -145,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = args.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.class_list:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
