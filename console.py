@@ -169,15 +169,16 @@ class HBNBCommand(cmd.Cmd):
                         attr_type = type(class_instance, attr)
                         if attr_type == int:
                             setattr(all_instances[class_instance],
-                                         attr, int(value))
+                                    attr, int(value))
                             storage.save()
                         elif attr_type == float:
                             setattr(all_instances[class_instance],
-                                         attr, float(value))
+                                    attr, float(value))
                             storage.save()
                         else:
                             setattr(all_instances[class_instance], attr, value)
                             storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
