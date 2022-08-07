@@ -201,6 +201,14 @@ class HBNBCommand(cmd.Cmd):
                 self.all_method(args_list[0])
             elif args_list[1] == "count()":
                 print(self.count_method(args_list[0]))
+            elif args_list[1][:4] == "show":
+                tmp = args_list[1].split('"')
+                self.do_show(args_list[0] + ' ' + tmp[1])
+            elif args_list[1][:7] == "destroy":
+                tmp = args_list[1].split('"')
+                self.do_destroy(args_list[0] + ' ' + tmp[1])
+            elif args_list[1][:6] == "update":
+                print("here")
 
     @classmethod
     def all_method(cls, class_name):
