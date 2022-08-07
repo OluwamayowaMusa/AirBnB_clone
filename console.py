@@ -7,6 +7,7 @@ make us of the methods and attributes associted with the cmd.Cmd class
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -55,13 +56,13 @@ class HBNBCommand(cmd.Cmd):
             args (...): Name of Model passed
         """
         if not args:
-            print("**class name missing **")
+            print("** class name missing **")
         else:
             args = args.split()
             if args[0] not in self.class_list:
                 print("** class doesn't exist **")
             else:
-                new_instance = eval(args[0])(args[1:])
+                new_instance = eval("{}()".format(args[0]))
                 print(new_instance.id)
                 new_instance.save()
 
@@ -158,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
                 if class_instance not in all_instances:
                     print("** no instance found **")
                 elif len(args) < 3:
-                    print("** attribute missing **")
+                    print("** attribute name missing **")
                 elif len(args) < 4:
                     print("** value missing **")
                 else:
