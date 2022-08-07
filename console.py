@@ -184,7 +184,11 @@ class HBNBCommand(cmd.Cmd):
                                     attr, value)
                         storage.save()
                     else:
-                        setattr(all_instances[class_instance], attr, value)
+                        if value.isnumeric():
+                            setattr(all_instances[class_instance], attr,
+                                    int(value))
+                        else:
+                            setattr(all_instances[class_instance], attr, value)
                         storage.save()
 
     def default(self, args):
@@ -208,7 +212,13 @@ class HBNBCommand(cmd.Cmd):
                 tmp = args_list[1].split('"')
                 self.do_destroy(args_list[0] + ' ' + tmp[1])
             elif args_list[1][:6] == "update":
-                print("here")
+                tmp = args_list[1].split('"')
+                if len(tmp) == 7:
+                    self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3]
+                                   + ' ' + tmp[5])
+                else:
+                    self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3] +
+                                   ' ' + tmp[4][1:-1])
 
     @classmethod
     def all_method(cls, class_name):
