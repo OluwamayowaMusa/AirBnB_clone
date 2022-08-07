@@ -212,9 +212,9 @@ class HBNBCommand(cmd.Cmd):
         for key in all_instances:
             if class_name == key.split('.')[0]:
                 print(all_instances[key], end='')
-            if count != number - 1:
-                print(", ", end='')
-                count += 1
+                if count != number - 1:
+                    print(", ", end='')
+                    count += 1
         print("]")
 
     @staticmethod
