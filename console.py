@@ -187,6 +187,46 @@ class HBNBCommand(cmd.Cmd):
                         setattr(all_instances[class_instance], attr, value)
                         storage.save()
 
+    def default(self, args):
+        """ Methods with User.
+
+        Args:
+            args (str): Arguments passed
+        """
+        args_list = args.split('.')
+        if args_list[0] not in self.class_list or len(args_list) != 2:
+            super().default(args)
+        else:
+            if args_list[1] == "all()":
+                self.all_method(args_list[0])
+            elif args_list[1] == "count()":
+                print(self.count_method(args_list[0]))
+
+    @classmethod
+    def all_method(cls, class_name):
+        """ Print all instances 'class name' """
+        all_instances = storage.all()
+        number = cls.count_method(class_name)
+        count = 0
+        print("[", end='')
+        for key in all_instances:
+            if class_name == key.split('.')[0]:
+                print(all_instances[key], end='')
+            if count != number - 1:
+                print(", ", end='')
+                count += 1
+        print("]")
+
+    @staticmethod
+    def count_method(class_name):
+        """ Print the number of instances of a class """
+        all_instances = storage.all()
+        count = 0
+        for key in all_instances:
+            if class_name == key.split('.')[0]:
+                count += 1
+        return count
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
