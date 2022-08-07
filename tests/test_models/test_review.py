@@ -26,4 +26,3 @@ class TestReview(unittest.TestCase):
     def tearDownClass(cls):
         """ Destroy Test Examples """
         del cls.model1
-

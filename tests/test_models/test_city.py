@@ -10,7 +10,7 @@ class TestCity(unittest.TestCase):
     """ Test Cases for City class.
 
     """
-    
+
     @classmethod
     def setUpClass(cls):
         """ Setup Test Examples """

@@ -22,9 +22,7 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(type(self.model1.name), str)
         self.assertEqual(self.model1.name, "hot tub")
 
-
     @classmethod
     def tearDownClass(cls):
         """ Destroy test examples """
         del cls.model1
-

@@ -23,4 +23,4 @@ class TestState(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         """ Destroy Test Examples """
-        del cls.model1 
+        del cls.model1
