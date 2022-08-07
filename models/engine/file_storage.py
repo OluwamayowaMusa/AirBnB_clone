@@ -38,15 +38,16 @@ class FileStorage:
         temp_dict = {}
         for key in self.__objects:
             temp_dict[key] = self.__objects[key].to_dict()
+        json_string = json.dumps(temp_dict)
         with open(self.__file_path, 'w', encoding='utf-8') as temp_file:
-            json.dump(temp_dict, temp_file)
+            temp_file.write(json_string)
 
     def reload(self):
         """ Deserializes the JSON file to __objects """
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as temp_file:
-                temp_dict = json.load(temp_file)
-
+                json_string = temp_file.read()
+            temp_dict = json.loads(json_string)
             from models.base_model import BaseModel
             from models.user import User
             from models.place import Place
