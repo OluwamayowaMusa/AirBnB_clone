@@ -212,13 +212,19 @@ class HBNBCommand(cmd.Cmd):
                 tmp = args_list[1].split('"')
                 self.do_destroy(args_list[0] + ' ' + tmp[1])
             elif args_list[1][:6] == "update":
-                tmp = args_list[1].split('"')
-                if len(tmp) == 7:
+                if '{' not in args_list[1]:
+                    tmp = args_list[1].split('"')
+                else:
+                    tmp = args_list[1].split('{')
+                if len(tmp) == 7 and '{' not in tmp[2]:
                     self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3]
                                    + ' ' + tmp[5])
-                else:
+                elif len(tmp) == 5:
                     self.do_update(args_list[0] + ' ' + tmp[1] + ' ' + tmp[3] +
                                    ' ' + tmp[4][1:-1])
+                else:
+                    self.update_dict(args_list[0] + ' ' + tmp[0][8:-3],
+                                     "{'" + tmp[1][1:-1])
 
     @classmethod
     def all_method(cls, class_name):
@@ -234,6 +240,17 @@ class HBNBCommand(cmd.Cmd):
                     print(", ", end='')
                     count += 1
         print("]")
+
+    def update_dict(self, class_id, attr_dict):
+        """ Update Object using Dictionary.
+
+        Args:
+            class_id (str) : Class name and unique ID
+            attr_dict (str): Dictionary containing  the attributes
+        """
+        tmp_dict = eval(attr_dict)
+        for key, value in tmp_dict.items():
+            self.do_update(class_id + ' ' + key + ' ' + str(value))
 
     @staticmethod
     def count_method(class_name):
