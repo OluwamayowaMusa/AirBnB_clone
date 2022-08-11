@@ -15,12 +15,11 @@ class TestCity(unittest.TestCase):
     def setUpClass(cls):
         """ Setup Test Examples """
         cls.model1 = City()
-        cls.model1.name = "Lagos"
 
     def test_attr(self):
         """ Test attributes of City """
         self.assertEqual(type(self.model1.name), str)
-        self.assertEqual(self.model1.name, "Lagos")
+        self.assertEqual(type(self.model1.state_id), str)
 
     @classmethod
     def tearDownClass(cls):

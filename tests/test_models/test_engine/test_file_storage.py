@@ -27,6 +27,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.save()
         self.storage.reload()
         temp_dict = self.storage.all()
+        self.assertEqual(type(self.storage.all()), dict)
         self.assertEqual(type(temp_dict), dict)
         for key in temp_dict:
             if key.split('.')[0] == "BaseModel":
