@@ -26,6 +26,11 @@ class TestConsole(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("help")
             self.assertEqual(type(f.getvalue()), str)
+            self.assertEqual(f.getvalue(), "\nDocumented commands "
+                                           "(type help <topic>):\n======"
+                                           "================================"
+                                           "==\nEOF  all  create  destroy"
+                                           "  help  quit  show  update\n\n")
 
     def test_emptyline(self):
         """ Test the emptyline method """
