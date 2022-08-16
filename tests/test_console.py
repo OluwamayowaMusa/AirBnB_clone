@@ -14,4 +14,19 @@ class TestConsole(unittest.TestCase):
     """
 
     def test_quit(self):
+        """ Test the do_quit method """
         self.assertIs(HBNBCommand().onecmd("quit"), True)
+
+    def test_EOF(self):
+        """ Test the do_EOF method """
+        self.assertIs(HBNBCommand().onecmd("EOF"), True)
+
+    def test_help(self):
+        """ Test the default help method """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("help")
+            self.assertEqual(type(f.getvalue()), str)
+
+    def test_emptyline(self):
+        """ Test the emptyline method """
+        self.assertEqual(HBNBCommand().onecmd("\n"), None)
