@@ -30,3 +30,9 @@ class TestConsole(unittest.TestCase):
     def test_emptyline(self):
         """ Test the emptyline method """
         self.assertEqual(HBNBCommand().onecmd("\n"), None)
+
+    def test_create(self):
+        """ Test the do_create method """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("create BaseModel")
+            self.assertEqual(type(f.getvalue()), str)
