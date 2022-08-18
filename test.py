@@ -1,2 +1,2 @@
 from console import HBNBCommand
-HBNBCommand().onecmd('BaseModel.destroy("678gh-6789gh")')
+HBNBCommand().onecmd('BaseModel.update("678gh-6789gh", "name", "Musa")')
