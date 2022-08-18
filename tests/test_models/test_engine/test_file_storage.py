@@ -3,9 +3,11 @@
 
 """
 import unittest
+import os
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
+from unittest.mock import Mock
 
 
 class TestFileStorage(unittest.TestCase):
@@ -13,29 +15,24 @@ class TestFileStorage(unittest.TestCase):
 
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """ Setup Test Examples """
-        cls.storage = FileStorage()
-        cls.model1 = BaseModel()
-        cls.model1.name = "Test Model"
-        cls.model1.number = 1
+    def test_all(self):
+        """ Test method all of FileStorage class """
+        tmp_dict = FileStorage().all()
+        self.assertEqual(type(tmp_dict), dict)
 
-    def test_attr(self):
-        """ Test the attributes of File Storage """
-        self.storage.new(self.model1)
-        self.storage.save()
-        self.storage.reload()
-        temp_dict = self.storage.all()
-        self.assertEqual(type(self.storage.all()), dict)
-        self.assertEqual(type(temp_dict), dict)
-        for key in temp_dict:
-            if key.split('.')[0] == "BaseModel":
-                self.assertEqual(type(temp_dict[key]), BaseModel)
-            elif key.split('.')[0] == "User":
-                self.assertEqual(type(temp_dict[key]), User)
+    def test_new(self):
+        """ Test method new of FileStorage class """
+        FileStorage = Mock()
+        FileStorage().new.return_value = "added"
+        self.assertEqual("added", FileStorage().new())
 
-    @classmethod
-    def tearDownClass(cls):
-        """ Destroy Test Examples """
-        del cls.storage
+    def test_save(self):
+        """ Test method save of the FileStorage class """
+        FileStorage().save()
+        self.assertEqual(True, os.path.exists("file.json"))
+
+    def test_reload(self):
+        """ Test method reload of the FileStorage class """
+        FileStorage = Mock()
+        FileStorage().reload.return_value = "reloaded"
+        self.assertEqual("reloaded", FileStorage().reload())
