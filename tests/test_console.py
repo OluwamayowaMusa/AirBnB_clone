@@ -85,7 +85,7 @@ class TestConsole(unittest.TestCase):
             class_list = ["BaseModel", "Review", "User", "State",
                           "City", "Amenity", "Place"]
             for class_name in class_list:
-                HBNBCommand().onecmd("BaseModel.all()")
+                HBNBCommand().onecmd(class_name + ".all()")
                 tmp = f.getvalue()
                 tmp_list = list(tmp)
                 self.assertEqual(tmp_list[0], '[')
