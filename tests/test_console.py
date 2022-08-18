@@ -62,7 +62,7 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("destroy BaseModel")
             tmp = f.getvalue()
             self.assertEqual(tmp, "** instance id missing **\n")
-            
+
     def test_all(self):
         """ Test do_all method """
         with patch("sys.stdout", new=StringIO()) as f:
@@ -92,7 +92,7 @@ class TestConsole(unittest.TestCase):
             f.seek(position)
             tmp = f.read()
             tmp_list = list(tmp)
-            self.assertEqual(tmp_list[0],"[")
+            self.assertEqual(tmp_list[0], "[")
             self.assertEqual(tmp_list[-2], "]")
             HBNBCommand().onecmd("User.all()")
             position += len(tmp)
@@ -166,3 +166,10 @@ class TestConsole(unittest.TestCase):
             f.seek(position)
             tmp = int(f.read().strip())
             self.assertEqual(type(tmp), int)
+
+    def test_method_show(self):
+        """ Test <class_name>.show("id") """
+        with patch("sys.stdout", new= StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.show("567-678")')
+            tmp = f.getvalue()
+            self.assertEqual(tmp, "** no instance found **\n")
