@@ -141,3 +141,28 @@ class TestConsole(unittest.TestCase):
             f.seek(position)
             tmp = int(f.read().strip())
             self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("User.count()")
+            position += len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("Amenity.count()")
+            position += len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("State.count()")
+            position += len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("Place.count()")
+            position += len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("City.count()")
+            position += len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
