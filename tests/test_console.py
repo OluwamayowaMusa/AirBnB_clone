@@ -78,3 +78,15 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("update BaseModel")
             tmp = f.getvalue()
             self.assertEqual(tmp, "** instance id missing **\n")
+
+    def test_method_all(self):
+        """ Test <class_name>.all() """
+        with patch("sys.stdout", new=StringIO()) as f:
+            class_list = ["BaseModel", "Review", "User", "State",
+                          "City", "Amenity", "Place"]
+            for class_name in class_list:
+                HBNBCommand().onecmd("BaseModel.all()")
+                tmp = f.getvalue()
+                tmp_list = list(tmp)
+                self.assertEqual(tmp_list[0], '[')
+                self.assertEqual(tmp_list[-2], ']')
