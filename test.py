@@ -1,2 +1,2 @@
 from console import HBNBCommand
-HBNBCommand().onecmd("BaseModel.all()")
+HBNBCommand().onecmd("BaseModel.count()")

@@ -129,3 +129,10 @@ class TestConsole(unittest.TestCase):
             tmp_list = list(tmp)
             self.assertEqual(tmp_list[0], "[")
             self.assertEqual(tmp_list[-2], "]")
+
+    def test_method_count(self):
+        """ Test <class_name>.count() """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.count()")
+            tmp = int(f.getvalue().strip())
+            self.assertEqual(type(tmp), int)
