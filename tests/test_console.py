@@ -136,3 +136,8 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("BaseModel.count()")
             tmp = int(f.getvalue().strip())
             self.assertEqual(type(tmp), int)
+            HBNBCommand().onecmd("Review.count()")
+            position = len(str(tmp)) + 1
+            f.seek(position)
+            tmp = int(f.read().strip())
+            self.assertEqual(type(tmp), int)
