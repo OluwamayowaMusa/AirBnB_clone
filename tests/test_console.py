@@ -82,11 +82,14 @@ class TestConsole(unittest.TestCase):
     def test_method_all(self):
         """ Test <class_name>.all() """
         with patch("sys.stdout", new=StringIO()) as f:
-            class_list = ["BaseModel", "Review", "User", "State",
-                          "City", "Amenity", "Place"]
-            for class_name in class_list:
-                HBNBCommand().onecmd(class_name + ".all()")
-                tmp = f.getvalue()
-                tmp_list = list(tmp)
-                self.assertEqual(tmp_list[0], '[')
-                self.assertEqual(tmp_list[-2], ']')
+            HBNBCommand().onecmd("BaseModel.all()")
+            tmp = f.getvalue()
+            tmp_list = list(tmp)
+            self.assertEqual(tmp_list[0], '[')
+            self.assertEqual(tmp_list[-2], ']')
+            HBNBCommand().onecmd("Review.all()")
+            f.seek(len(tmp))
+            tmp = f.read()
+            tmp_list = list(tmp)
+            self.assertEqual(tmp_list[0],"[")
+            self.assertEqual(tmp_list[-2], "]")
