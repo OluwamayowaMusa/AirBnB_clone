@@ -169,7 +169,7 @@ class TestConsole(unittest.TestCase):
 
     def test_method_show(self):
         """ Test <class_name>.show("id") """
-        with patch("sys.stdout", new= StringIO()) as f:
+        with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd('BaseModel.show("567-678")')
             tmp = f.getvalue()
             self.assertEqual(tmp, "** no instance found **\n")
@@ -199,6 +199,43 @@ class TestConsole(unittest.TestCase):
             tmp = f.read()
             self.assertEqual(tmp, "** no instance found **\n")
             HBNBCommand().onecmd('Place.show("78jhg-ghj789")')
+            position += len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+
+    def test_method_destroy(self):
+        """ Test <class_name>.destroy("id") """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.destroy("567-678")')
+            tmp = f.getvalue()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('User.destroy("6789-98765gh")')
+            position = len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('State.destroy("6789-fghkj")')
+            position += len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('City.destroy("1234-jhg")')
+            position += len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('Amenity.destroy("345528u-ghj987")')
+            position += len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('Review.destroy("0987ghj-89098")')
+            position += len(tmp)
+            f.seek(position)
+            tmp = f.read()
+            self.assertEqual(tmp, "** no instance found **\n")
+            HBNBCommand().onecmd('Place.destroy("78jhg-ghj789")')
             position += len(tmp)
             f.seek(position)
             tmp = f.read()
