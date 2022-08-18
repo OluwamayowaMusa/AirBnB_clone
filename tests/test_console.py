@@ -34,10 +34,17 @@ class TestConsole(unittest.TestCase):
 
     def test_emptyline(self):
         """ Test the emptyline method """
-        self.assertEqual(HBNBCommand().onecmd("\n"), None)
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("\n")
+            tmp = f.getvalue()
+            self.assertEqual(tmp, '')
 
     def test_create(self):
         """ Test the do_create method """
         with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
-            self.assertEqual(type(f.getvalue()), str)
+            tmp = f.getvalue()
+            tmp_list = tmp.split('-')
+            self.assertEqual(len(tmp_list), 5)
+            for i in tmp_list:
+                self.assertEqual(i.isascii(), True)
