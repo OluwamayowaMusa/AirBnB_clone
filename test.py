@@ -1,2 +1,2 @@
 from console import HBNBCommand
-HBNBCommand().onecmd("\n")
+HBNBCommand().onecmd("update BaseModel")

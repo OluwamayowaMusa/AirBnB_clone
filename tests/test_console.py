@@ -48,3 +48,33 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(len(tmp_list), 5)
             for i in tmp_list:
                 self.assertEqual(i.isascii(), True)
+
+    def test_show(self):
+        """ Test the do_show method """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel")
+            tmp = f.getvalue()
+            self.assertEqual(tmp, "** instance id missing **\n")
+
+    def test_destroy(self):
+        """ Test do_destroy method """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("destroy BaseModel")
+            tmp = f.getvalue()
+            self.assertEqual(tmp, "** instance id missing **\n")
+            
+    def test_all(self):
+        """ Test do_all method """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("all BaseModel")
+            tmp = f.getvalue()
+            tmp_list = list(tmp)
+            self.assertEqual(tmp_list[0], "[")
+            self.assertEqual(tmp_list[-2], "]")
+
+    def test_update(self):
+        """ Test do_update """
+        with patch("sys.stdout", new=StringIO()) as f:
+            HBNBCommand().onecmd("update BaseModel")
+            tmp = f.getvalue()
+            self.assertEqual(tmp, "** instance id missing **\n")
