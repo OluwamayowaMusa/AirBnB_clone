@@ -23,8 +23,8 @@ class TestFileStorage(unittest.TestCase):
     def test_new(self):
         """ Test method new of FileStorage class """
         FileStorage = Mock()
-        FileStorage().new.return_value = "added"
-        self.assertEqual("added", FileStorage().new())
+        FileStorage.new.return_value = "added"
+        self.assertEqual("added", FileStorage.new())
 
     def test_save(self):
         """ Test method save of the FileStorage class """
@@ -34,5 +34,5 @@ class TestFileStorage(unittest.TestCase):
     def test_reload(self):
         """ Test method reload of the FileStorage class """
         FileStorage = Mock()
-        FileStorage().reload.return_value = "reloaded"
-        self.assertEqual("reloaded", FileStorage().reload())
+        FileStorage.reload.return_value = "reloaded"
+        self.assertEqual("reloaded", FileStorage.reload())
