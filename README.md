@@ -1,13 +1,3 @@
 # 0x00. AirBnB clone - The console
+ This is a clone of the web appication AirBnb called HBnb. HBnb is a complete web application, integrating database storage, a back-end API and a front-end interface for the user. This part of the project only implements the back-end console. The back-end console creates the data model, manage(create, update, destroy, etc) objects, store and persist objects to a file(JSON file).
 
-## Learning Objectives
-* **How to create a Python package**
-* **How to create a command interpreter in Python using the `cmd` module**
-* **What is Unit testing and how to implement it in a large project**
-* **How to serialize and deserialize a Class**
-* **How to write and read a JSON file**
-* **How to manage `datetime`**
-* **What is an `UUID`**
-* **What is `*args` and how to use it**
-* **What is `**kwargs` and how to use it**
-* **How to handle named arguments in a function**
