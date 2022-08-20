@@ -53,7 +53,6 @@ $ python3 -m unittest discover tests
 ```
 $ python3 -m unittest <file_name>(file_name can be found in the test folder
 ```
-
 ## Authors
-* **Musa Oluwamayowa Micheal**
+* **Musa Oluwamayowa Michael**
 * **Ajimobi Oluwatosin Kareemat** 
